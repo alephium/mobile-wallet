@@ -74,7 +74,9 @@ export const storeWallet = async (
           requireAuthentication: true,
           authenticationPrompt: 'Please, authenticate to store your wallet securely'
         }
-      : undefined
+      : {
+        keychainService: 'alephium-mobile-wallet'
+      }
 
   await SecureStore.setItemAsync(`wallet-${walletId}`, mnemonic, secureStoreConfig)
   await SecureStore.setItemAsync('active-wallet-id', walletId, secureStoreConfig)
