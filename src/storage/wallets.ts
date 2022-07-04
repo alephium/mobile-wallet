@@ -77,7 +77,7 @@ export const storeWallet = async (
       : undefined
 
   await SecureStore.setItemAsync(`wallet-${walletId}`, mnemonic, secureStoreConfig)
-  await SecureStore.setItemAsync('active-wallet-id', walletId)
+  await SecureStore.setItemAsync('active-wallet-id', walletId, secureStoreConfig)
 
   return walletId
 }
