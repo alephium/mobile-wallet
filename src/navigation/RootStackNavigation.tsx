@@ -16,10 +16,10 @@ You should have received a copy of the GNU Lesser General Public License
 along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native'
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
-import { View } from 'react-native'
 import { useTheme } from 'styled-components'
 
 import useBottomModalOptions from '../hooks/useBottomModalOptions'
@@ -38,10 +38,12 @@ import PinCodeCreationScreen from '../screens/new-wallet/PinCodeCreationScreen'
 import NewAddressScreen from '../screens/NewAddressScreen'
 import SplashScreen from '../screens/SplashScreen'
 import SwitchWalletScreen from '../screens/SwitchWalletScreen'
+import InWalletTabsNavigation from './InWalletNavigation'
 import RootStackParamList from './rootStackRoutes'
 
 const navigationRef = createNavigationContainerRef<RootStackParamList>()
 const RootStack = createStackNavigator<RootStackParamList>()
+const InWalletNavigator = createBottomTabNavigator()
 
 const RootStackNavigation = () => {
   const theme = useTheme()
@@ -71,10 +73,12 @@ const RootStackNavigation = () => {
         <RootStack.Screen name="AddBiometricsScreen" component={AddBiometricsScreen} />
         <RootStack.Screen name="NewWalletSuccessPage" component={NewWalletSuccessPage} />
 
-        <RootStack.Screen name="DashboardScreen" component={DashboardScreen} options={{ headerShown: false }} />
+        {/* IN WALLET TABS */}
+        <RootStack.Screen name="DashboardScreen" component={InWalletTabsNavigation} options={{ headerShown: false }} />
+
         <RootStack.Screen name="SwitchWalletScreen" component={SwitchWalletScreen} options={bottomModalOptions} />
-        <RootStack.Screen name="AddressesScreen" component={AddressesScreen} />
         <RootStack.Screen name="AddressScreen" component={AddressScreen} options={bottomModalOptions} />
+
         <RootStack.Screen
           name="NewAddressScreen"
           component={NewAddressScreen}
