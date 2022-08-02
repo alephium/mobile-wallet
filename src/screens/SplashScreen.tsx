@@ -46,7 +46,7 @@ const SplashScreen = ({ navigation }: { style: StyleProp<ViewStyle> } & ScreenPr
           navigation.navigate('LoginScreen', { storedWallet: storedActiveWallet })
         } else if (storedActiveWallet.authType === 'biometrics') {
           dispatch(activeWalletChanged(storedActiveWallet))
-          navigation.navigate('DashboardScreen')
+          navigation.navigate('InWalletScreen')
         } else {
           throw new Error('Unknown auth type')
         }
