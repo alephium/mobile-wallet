@@ -37,7 +37,7 @@ const App = () => (
     <Main>
       <ThemeProvider theme={lightTheme}>
         <RootStackNavigation />
-        <StatusBar style="auto" />
+        <StatusBar style="dark" />
       </ThemeProvider>
     </Main>
   </Provider>
