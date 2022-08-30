@@ -17,10 +17,13 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native'
+import { NavigationState } from '@react-navigation/routers'
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack'
+import { useEffect } from 'react'
 import { useTheme } from 'styled-components'
 
 import useBottomModalOptions from '../hooks/layout/useBottomModalOptions'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import AddressScreen from '../screens/AddressScreen'
 import EditAddressScreen from '../screens/EditAddressScreen'
 import LandingScreen from '../screens/LandingScreen'
@@ -39,6 +42,7 @@ import SwitchNetworkScreen from '../screens/SwitchNetworkScreen'
 import SwitchWalletAfterDeletionScreen from '../screens/SwitchWalletAfterDeletionScreen'
 import SwitchWalletScreen from '../screens/SwitchWalletScreen'
 import TransactionScreen from '../screens/TransactionScreen'
+import { routeChanged } from '../store/appMetadataSlice'
 import InWalletTabsNavigation from './InWalletNavigation'
 import RootStackParamList from './rootStackRoutes'
 
@@ -48,11 +52,32 @@ const RootStack = createStackNavigator<RootStackParamList>()
 const RootStackNavigation = () => {
   const theme = useTheme()
   const bottomModalOptions = useBottomModalOptions()
+  const dispatch = useAppDispatch()
+  const { lastNavigationState, isAppBackgroundedAcknowledged } = useAppSelector((state) => state.appMetadata)
+
+  const handleStateChange = (state: NavigationState) => {
+    // Do not record state changes until "foregrounding processes" are done (login, navigation state restore)
+    if (isAppBackgroundedAcknowledged) {
+      dispatch(routeChanged(state))
+    }
+  }
 
   console.log('RootStackNavigation renders')
 
+  useEffect(
+    () => {
+      if (isAppBackgroundedAcknowledged && lastNavigationState) {
+        rootStackNavigationRef.resetRoot(lastNavigationState)
+      } else {
+        rootStackNavigationRef.navigate('InWalletScreen')
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isAppBackgroundedAcknowledged]
+  )
+
   return (
-    <NavigationContainer ref={rootStackNavigationRef}>
+    <NavigationContainer ref={rootStackNavigationRef} onStateChange={handleStateChange}>
       <RootStack.Navigator
         initialRouteName={'SplashScreen'}
         screenOptions={{
