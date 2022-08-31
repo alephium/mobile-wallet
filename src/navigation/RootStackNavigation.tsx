@@ -69,6 +69,11 @@ const RootStackNavigation = () => {
 
   useEffect(
     () => {
+      if (!isAuthenticated) {
+        setIsResetFromBeingInactive(false)
+        return
+      }
+
       if (isAuthenticated && !isAppBackgroundedAcknowledged) {
         rootStackNavigationRef.resetRoot(lastNavigationState)
         setIsResetFromBeingInactive(true)
