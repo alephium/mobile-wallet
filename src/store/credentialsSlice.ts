@@ -20,12 +20,16 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const sliceName = 'credentials'
 
+type AuthenicationState = 'failure-decrypt-biometrics'
+
 interface SecurityState {
   pin: string | null
+  authenticationState?: AuthenicationState
 }
 
 const initialState: SecurityState = {
-  pin: null
+  pin: null,
+  authenticationState: undefined
 }
 
 const credentialsSlice = createSlice({
@@ -39,10 +43,14 @@ const credentialsSlice = createSlice({
       return {
         ...initialState
       }
-    }
+    },
+    authenicationStateUpdated: (state, action) => ({
+      ...state,
+      authenticationState: action.payload
+    })
   }
 })
 
-export const { pinEntered, pinFlushed } = credentialsSlice.actions
+export const { pinEntered, pinFlushed, authenicationStateUpdated } = credentialsSlice.actions
 
 export default credentialsSlice

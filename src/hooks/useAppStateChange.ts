@@ -20,10 +20,16 @@ import { useCallback, useEffect, useRef } from 'react'
 import { Alert, AppState, AppStateStatus } from 'react-native'
 
 import { navigateRootStack } from '../navigation/RootStackNavigation'
-import { areThereOtherWallets, getStoredActiveWallet } from '../storage/wallets'
+import {
+  areThereOtherWallets,
+  getStoredActiveWallet,
+  getStoredActiveWalletId,
+  getStoredWalletById,
+  getWalletMetadataById
+} from '../storage/wallets'
 import { activeWalletChanged, walletFlushed } from '../store/activeWalletSlice'
 import { appBackgroundedAcknowledged, authenticated } from '../store/appMetadataSlice'
-import { pinFlushed } from '../store/credentialsSlice'
+import { pinFlushed, authenicationStateUpdated } from '../store/credentialsSlice'
 import { useAppDispatch, useAppSelector } from './redux'
 
 export const useAppStateChange = () => {
@@ -32,22 +38,30 @@ export const useAppStateChange = () => {
   const activeWallet = useAppSelector((state) => state.activeWallet)
 
   const getWalletFromStorageAndNavigate = useCallback(async () => {
+    const walletId = await getStoredActiveWalletId()
+    if (!walletId) return
+
+    const { authType } = await getWalletMetadataById(walletId)
+    let storedWallet
+
     try {
-      const storedActiveWallet = await getStoredActiveWallet()
-      if (storedActiveWallet === null) {
+      storedWallet = await getStoredWalletById(walletId, { biometrics: authType === 'biometrics' })
+
+      if (storedWallet === null) {
         const result = await areThereOtherWallets()
         navigateRootStack(result ? 'SwitchWalletAfterDeletionScreen' : 'LandingScreen')
-      } else if (storedActiveWallet.authType === 'pin') {
-        navigateRootStack('LoginScreen', { storedWallet: storedActiveWallet })
-      } else if (storedActiveWallet.authType === 'biometrics') {
-        dispatch(activeWalletChanged(storedActiveWallet))
+      } else if (authType === 'biometrics') {
+        dispatch(authenicationStateUpdated(undefined))
+        dispatch(activeWalletChanged(storedWallet))
         navigateRootStack('InWalletScreen')
       } else {
-        throw new Error('Unknown auth type')
+        navigateRootStack('LoginScreen', { storedWallet })
       }
+
       // TODO: Revisit error handling with proper error codes
     } catch (e: unknown) {
       const error = e as { message?: string }
+
       if (error.message === 'User canceled the authentication') {
         Alert.alert('Authentication required', 'Please authenticate to unlock your wallet.', [
           { text: 'Try again', onPress: getWalletFromStorageAndNavigate }
@@ -57,6 +71,8 @@ export const useAppStateChange = () => {
           'Authentication required',
           'This wallet is only accessibly via biometrics authentication, please set up biometrics (fingerprint) on your device settings and try again.'
         )
+      } else if (authType === 'biometrics') {
+        dispatch(authenicationStateUpdated('failure-decrypt-biometrics'))
       } else {
         console.error(e)
       }

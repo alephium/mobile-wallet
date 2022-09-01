@@ -70,38 +70,43 @@ export const storeWallet = async (
     }
   }
 
-  const secureStoreConfig =
-    authType === 'biometrics'
-      ? {
-          requireAuthentication: true,
-          authenticationPrompt: 'Please, authenticate to store your wallet securely',
-          keychainService
-        }
-      : {
-          keychainService
-        }
+  // Must store encrypted twice, once with biometrics and other without.
+  // If biometrics change, wallet is still accessible, but protected with PIN.
+  if (authType === 'biometrics') {
+    await SecureStore.setItemAsync(`wallet-${walletId}-bio`, mnemonic, {
+      requireAuthentication: true,
+      authenticationPrompt: 'Please, authenticate to store your wallet securely',
+      keychainService
+    })
+  }
 
-  await SecureStore.setItemAsync(`wallet-${walletId}`, mnemonic, secureStoreConfig)
+  await SecureStore.setItemAsync(`wallet-${walletId}`, mnemonic, { keychainService })
+
   await AsyncStorage.setItem('active-wallet-id', walletId)
 
   return walletId
 }
 
-export const getStoredWalletById = async (id: string): Promise<ActiveWalletState | null> => {
+interface GetWalletOptions {
+  biometrics?: boolean
+}
+
+export const getStoredWalletById = async (
+  id: string,
+  options?: GetWalletOptions
+): Promise<ActiveWalletState | null> => {
   const { name, authType } = await getWalletMetadataById(id)
+  let mnemonic
 
-  const secureStoreConfig =
-    authType === 'biometrics'
-      ? {
-          requireAuthentication: true,
-          authenticationPrompt: `Please, authenticate to unlock "${name}"`,
-          keychainService
-        }
-      : {
-          keychainService
-        }
-
-  const mnemonic = await SecureStore.getItemAsync(`wallet-${id}`, secureStoreConfig)
+  if (options?.biometrics) {
+    mnemonic = await SecureStore.getItemAsync(`wallet-${id}-bio`, {
+      requireAuthentication: true,
+      authenticationPrompt: `Please, authenticate to unlock "${name}"`,
+      keychainService
+    })
+  } else {
+    mnemonic = await SecureStore.getItemAsync(`wallet-${id}`, { keychainService })
+  }
 
   if (!mnemonic) throw 'Could not find wallet'
 
@@ -113,8 +118,11 @@ export const getStoredWalletById = async (id: string): Promise<ActiveWalletState
   } as ActiveWalletState
 }
 
+export const getStoredActiveWalletId = async (): Promise<string | null> =>
+  await AsyncStorage.getItem('active-wallet-id')
+
 export const getStoredActiveWallet = async (): Promise<ActiveWalletState | null> => {
-  const id = await AsyncStorage.getItem('active-wallet-id')
+  const id = await getStoredActiveWalletId()
   if (!id) return null
 
   return await getStoredWalletById(id)
@@ -172,7 +180,7 @@ export const areThereOtherWallets = async (): Promise<boolean> => {
   return Array.isArray(walletsMetadata) && walletsMetadata.length > 0
 }
 
-const getWalletMetadataById = async (id: string): Promise<WalletMetadata> => {
+export const getWalletMetadataById = async (id: string): Promise<WalletMetadata> => {
   const walletsMetadata = await getWalletsMetadata()
   return walletsMetadata.find((wallet: WalletMetadata) => wallet.id === id) as WalletMetadata
 }

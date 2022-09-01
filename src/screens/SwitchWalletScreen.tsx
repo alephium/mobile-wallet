@@ -19,7 +19,7 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 import { StackScreenProps } from '@react-navigation/stack'
 import { ArrowDown as ArrowDownIcon, Plus as PlusIcon } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
-import { StyleProp, ViewStyle } from 'react-native'
+import { Alert, StyleProp, ViewStyle } from 'react-native'
 import styled, { useTheme } from 'styled-components/native'
 
 import AppText from '../components/AppText'
@@ -29,9 +29,18 @@ import Screen, { BottomModalScreenTitle, ScreenSection } from '../components/lay
 import RadioButtonRow from '../components/RadioButtonRow'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import RootStackParamList from '../navigation/rootStackRoutes'
-import { getStoredWalletById, getWalletsMetadata } from '../storage/wallets'
+import { navigateRootStack } from '../navigation/RootStackNavigation'
+import {
+  areThereOtherWallets,
+  getStoredActiveWallet,
+  getStoredActiveWalletId,
+  getStoredWalletById,
+  getWalletMetadataById,
+  getWalletsMetadata
+} from '../storage/wallets'
 import { activeWalletChanged } from '../store/activeWalletSlice'
 import { authenticated } from '../store/appMetadataSlice'
+import { authenicationStateUpdated } from '../store/credentialsSlice'
 import { methodSelected, WalletGenerationMethod } from '../store/walletGenerationSlice'
 import { WalletMetadata } from '../types/wallet'
 
@@ -51,22 +60,42 @@ const SwitchWalletScreen = ({ navigation, style }: SwitchWalletScreenProps) => {
   }
 
   const handleWalletItemPress = async (walletId: string) => {
-    try {
-      const storedWallet = await getStoredWalletById(walletId)
-      if (!storedWallet) return
+    const { authType } = await getWalletMetadataById(walletId)
+    let storedWallet
 
-      if (storedWallet.authType === 'pin') {
+    try {
+      storedWallet = await getStoredWalletById(walletId, { biometrics: authType === 'biometrics' })
+
+      if (storedWallet === null) {
+        const result = await areThereOtherWallets()
+        navigateRootStack(result ? 'SwitchWalletAfterDeletionScreen' : 'LandingScreen')
+      } else if (authType === 'biometrics') {
         dispatch(authenticated(false))
-        navigation.navigate('LoginScreen', { storedWallet })
-      } else if (storedWallet.authType === 'biometrics') {
-        dispatch(authenticated(false))
+        dispatch(authenicationStateUpdated(undefined))
         dispatch(activeWalletChanged(storedWallet))
-        navigation.navigate('InWalletScreen')
+        navigateRootStack('InWalletScreen')
       } else {
-        throw new Error('Unknown auth type')
+        navigateRootStack('LoginScreen', { storedWallet })
       }
-    } catch (e) {
-      console.error('Could not switch wallets', e)
+
+      // TODO: Revisit error handling with proper error codes
+    } catch (e: unknown) {
+      const error = e as { message?: string }
+
+      if (error.message === 'User canceled the authentication') {
+        Alert.alert('Authentication required', 'Please authenticate to unlock your wallet.', [
+          { text: 'Try again', onPress: () => handleWalletItemPress(walletId) }
+        ])
+      } else if (error.message === 'No biometrics are currently enrolled') {
+        Alert.alert(
+          'Authentication required',
+          'This wallet is only accessibly via biometrics authentication, please set up biometrics (fingerprint) on your device settings and try again.'
+        )
+      } else if (authType === 'biometrics') {
+        dispatch(authenicationStateUpdated('failure-decrypt-biometrics'))
+      } else {
+        console.error(e)
+      }
     }
   }
 
