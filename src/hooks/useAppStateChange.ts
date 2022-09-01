@@ -22,14 +22,13 @@ import { Alert, AppState, AppStateStatus } from 'react-native'
 import { navigateRootStack } from '../navigation/RootStackNavigation'
 import {
   areThereOtherWallets,
-  getStoredActiveWallet,
   getStoredActiveWalletId,
   getStoredWalletById,
   getWalletMetadataById
 } from '../storage/wallets'
 import { activeWalletChanged, walletFlushed } from '../store/activeWalletSlice'
 import { appBackgroundedAcknowledged, authenticated } from '../store/appMetadataSlice'
-import { pinFlushed, authenicationStateUpdated } from '../store/credentialsSlice'
+import { authenicationStateUpdated, pinFlushed } from '../store/credentialsSlice'
 import { useAppDispatch, useAppSelector } from './redux'
 
 export const useAppStateChange = () => {

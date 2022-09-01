@@ -28,12 +28,10 @@ import ButtonsRow from '../components/buttons/ButtonsRow'
 import Screen, { BottomModalScreenTitle, ScreenSection } from '../components/layout/Screen'
 import RadioButtonRow from '../components/RadioButtonRow'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import RootStackParamList from '../navigation/rootStackRoutes'
 import { navigateRootStack } from '../navigation/RootStackNavigation'
+import RootStackParamList from '../navigation/rootStackRoutes'
 import {
   areThereOtherWallets,
-  getStoredActiveWallet,
-  getStoredActiveWalletId,
   getStoredWalletById,
   getWalletMetadataById,
   getWalletsMetadata
