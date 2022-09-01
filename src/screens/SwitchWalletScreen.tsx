@@ -28,7 +28,6 @@ import ButtonsRow from '../components/buttons/ButtonsRow'
 import Screen, { BottomModalScreenTitle, ScreenSection } from '../components/layout/Screen'
 import RadioButtonRow from '../components/RadioButtonRow'
 import { useAppDispatch, useAppSelector } from '../hooks/redux'
-import { navigateRootStack } from '../navigation/RootStackNavigation'
 import RootStackParamList from '../navigation/rootStackRoutes'
 import {
   areThereOtherWallets,
@@ -66,7 +65,7 @@ const SwitchWalletScreen = ({ navigation, style }: SwitchWalletScreenProps) => {
 
       if (storedWallet === null) {
         const result = await areThereOtherWallets()
-        navigateRootStack(result ? 'SwitchWalletAfterDeletionScreen' : 'LandingScreen')
+        navigation.navigate(result ? 'SwitchWalletAfterDeletionScreen' : 'LandingScreen')
       } else if (authType === 'biometrics') {
         dispatch(authenticated(false))
         dispatch(authenicationStateUpdated(undefined))
