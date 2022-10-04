@@ -24,6 +24,8 @@
     "big-integer": "^1.6.51",
     "buffer": "^6.0.3",
     "colord": "^2.9.3",
+    "d3-scale": "^4.0.2",
+    "d3-shape": "^3.1.0",
     "dayjs": "^1.11.2",
     "expo": "^46.0.0",
     "expo-clipboard": "~3.1.0",
