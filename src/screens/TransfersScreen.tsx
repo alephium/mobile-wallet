@@ -17,7 +17,9 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { StackScreenProps } from '@react-navigation/stack'
+import { useWindowDimensions } from 'react-native'
 
+import BarChart, { fakeData } from '../components/charts/BarChart'
 import InWalletScrollScreen from '../components/layout/InWalletScrollScreen'
 import { ScreenSection } from '../components/layout/Screen'
 import TransactionsList from '../components/TransactionsList'
@@ -31,9 +33,11 @@ type ScreenProps = StackScreenProps<InWalletTabsParamList & RootStackParamList, 
 
 const TransfersScreen = ({ navigation }: ScreenProps) => {
   const addressHashes = useAppSelector(selectAddressIds) as AddressHash[]
+  const { width } = useWindowDimensions()
 
   return (
     <InWalletScrollScreen>
+      <BarChart width={width} height={300} data={fakeData} />
       <ScreenSection>
         <TransactionsList addressHashes={addressHashes} />
       </ScreenSection>
