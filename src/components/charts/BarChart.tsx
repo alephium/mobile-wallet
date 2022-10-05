@@ -18,8 +18,11 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 
 import { scaleLinear } from 'd3-scale'
 import { useState } from 'react'
+import { LayoutChangeEvent } from 'react-native'
 import Svg, { Circle, Line, Rect, Text } from 'react-native-svg'
 import { useTheme } from 'styled-components/native'
+
+import { formatFiatAmountForDisplay } from '../../utils/numbers'
 
 const padding = {
   left: 50,
@@ -27,7 +30,8 @@ const padding = {
   fromCenterLine: 8,
   right: 32,
   yLabelBottom: 8,
-  barText: 6
+  barText: 6,
+  selectText: 8
 }
 
 const bar = {
@@ -37,6 +41,13 @@ const bar = {
 
 type Point = [number, number]
 type ChartData = Point[]
+
+interface Dimensions {
+  width: number
+  height: number
+  x: number
+  y: number
+}
 
 interface BarChartProps {
   data: ChartData
@@ -76,6 +87,20 @@ const BarChart = ({ data, width, height }: BarChartProps) => {
     ])
   }
 
+  const [xLabelDims, setXLabelDims] = useState<Dimensions[]>([])
+  const [selectLabelDims, setSelectLabelDims] = useState<Dimensions>({ x: 0, y: 0, width: 0, height: 0 })
+
+  const onXLabelLayout = (index: number) => (event: LayoutChangeEvent) => {
+    const { layout } = event.nativeEvent
+    xLabelDims[index] = layout
+    setXLabelDims([...xLabelDims])
+  }
+
+  const onSelectLabelLayout = (event: LayoutChangeEvent) => {
+    const { layout } = event.nativeEvent
+    setSelectLabelDims(layout)
+  }
+
   // eslint-disable-next-line react/display-name
   const toBar = (isSelected?: boolean) => (p: Point, index: number) => {
     const x = scale.x(p[0])
@@ -104,24 +129,38 @@ const BarChart = ({ data, width, height }: BarChartProps) => {
     const dotY = scale.y(pSelected[1])
     const finalY = dotY < 0 ? hh - padding.fromCenterLine * 1.5 : hh + padding.fromCenterLine * 1.5
 
-    const text = pSelected[1].toString() // TODO: Format
-    const textX =
-      x < width / 2 ? x + bar.width * 2 + padding.barText : x - bar.width - padding.barText - text.length * 6 // TODO: Real text width measurement
-    const textY = dotY < 0 ? hh + padding.fromCenterLine - dotY - 6 : hh + dotY * -1 - padding.fromCenterLine + 6
+    const { width: labelWidth, height: labelHeight } = selectLabelDims
+
+    // Dimensions haven't been measured yet
+    if (labelWidth === 0) return null
+
+    const text = formatFiatAmountForDisplay(pSelected[1])
+    const textX = x < width / 2 ? x + bar.width * 2 + padding.barText : x - labelWidth - bar.width - padding.barText
+    const textY =
+      dotY < 0
+        ? hh - dotY - padding.fromCenterLine + labelHeight
+        : hh - dotY - padding.fromCenterLine + labelHeight + padding.selectText
 
     selectedBar = (
       <>
         {toBar(true)(data[selectedIndex], selectedIndex)}
         <Circle fill={theme.global.accent} x={dotX} y={finalY} r={4} />
         <Rect
-          x={textX - 8}
-          y={textY + 8 - 24}
-          width={(text.length + 3) * 6}
+          x={textX - padding.selectText}
+          y={textY - padding.selectText - labelHeight}
+          width={labelWidth + padding.selectText * 2}
           height={24}
           fill={theme.bg.tertiary}
           rx={4}
         />
-        <Text x={textX} y={textY} fill={theme.global.accent} fontSize={12} fontWeight={600}>
+        <Text
+          onLayout={onSelectLabelLayout}
+          x={textX}
+          y={textY}
+          fill={theme.global.accent}
+          fontSize={12}
+          fontWeight={600}
+        >
           {text}
         </Text>
       </>
@@ -168,17 +207,21 @@ const BarChart = ({ data, width, height }: BarChartProps) => {
       if (!data[index]) return null
 
       const xValue = data[index][0]
-      const xPos = scale.x(xValue)
       const date = new Date(xValue)
       const text = date.getDay().toString().padStart(2, '0') + '/' + date.getMonth().toString().padStart(2, '0')
 
+      const { width: labelWidth, height: labelHeight } =
+        xLabelDims[index] ?? ({ x: 0, y: 0, width: 0, height: 0 } as Dimensions)
+      const [x, y] = [scale.x(xValue) + bar.width / 2 - labelWidth / 2, height - labelHeight]
+
       return (
         <Text
+          onLayout={onXLabelLayout(index)}
           key={index}
           fontSize={12}
           fontWeight={600}
-          x={xPos - (text.length / 2 + 8)} // TODO: measure the rendered text length instead of an estimate
-          y={height}
+          x={x}
+          y={y}
           fill={theme.font.tertiary}
         >
           {text}
