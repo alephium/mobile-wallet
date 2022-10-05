@@ -129,17 +129,14 @@ const BarChart = ({ data, width, height }: BarChartProps) => {
     const dotY = scale.y(pSelected[1])
     const finalY = dotY < 0 ? hh - padding.fromCenterLine * 1.5 : hh + padding.fromCenterLine * 1.5
 
-    const { width: labelWidth, height: labelHeight } = selectLabelDims
+    const { x: labelX, width: labelWidth, height: labelHeight } = selectLabelDims
 
     // Dimensions haven't been measured yet
-    if (labelWidth === 0) return null
+    if (labelWidth === 0 && labelX === 0) return null
 
     const text = formatFiatAmountForDisplay(pSelected[1])
     const textX = x < width / 2 ? x + bar.width * 2 + padding.barText : x - labelWidth - bar.width - padding.barText
-    const textY =
-      dotY < 0
-        ? hh - dotY - padding.fromCenterLine + labelHeight
-        : hh - dotY - padding.fromCenterLine + labelHeight + padding.selectText
+    const textY = hh - dotY - padding.fromCenterLine + labelHeight + (dotY < 0 ? 0 : padding.selectText)
 
     selectedBar = (
       <>
