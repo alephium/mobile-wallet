@@ -17,11 +17,12 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { StackScreenProps } from '@react-navigation/stack'
-import { StyleProp, ViewStyle } from 'react-native'
+import { StyleProp, useWindowDimensions, ViewStyle } from 'react-native'
 import styled from 'styled-components/native'
 
 import BalanceSummary from '../components/BalanceSummary'
 import Button from '../components/buttons/Button'
+import LineChart, { fakeData } from '../components/charts/LineChart'
 import InWalletScrollScreen from '../components/layout/InWalletScrollScreen'
 import { ScreenSection } from '../components/layout/Screen'
 import { useAppDispatch } from '../hooks/redux'
@@ -35,6 +36,7 @@ interface ScreenProps extends StackScreenProps<InWalletTabsParamList, 'Dashboard
 
 const DashboardScreen = ({ navigation, style }: ScreenProps) => {
   const dispatch = useAppDispatch()
+  const { width } = useWindowDimensions()
 
   const handleDeleteAllWallets = () => {
     deleteAllWallets()
@@ -44,6 +46,7 @@ const DashboardScreen = ({ navigation, style }: ScreenProps) => {
 
   return (
     <InWalletScrollScreen style={style}>
+      <LineChart width={width} height={300} data={fakeData} />
       <ScreenSection>
         <BalanceSummary />
       </ScreenSection>
