@@ -22,15 +22,16 @@ import { Alert, AppState, AppStateStatus } from 'react-native'
 
 import {
   areThereOtherWallets,
+  deriveAddressesFromStoredMetadata,
   disableBiometrics,
   getActiveWalletMetadata,
-  getStoredActiveWallet
+  getStoredActiveWallet,
+  rememberActiveWallet
 } from '../persistent-storage/wallets'
-import { biometricsDisabled } from '../store/activeWalletSlice'
+import { biometricsDisabled, unlockedWalletUsingBiometrics } from '../store/activeWalletSlice'
 import { appBecameInactive } from '../store/appSlice'
 import { navigateRootStack, useRestoreNavigationState } from '../utils/navigation'
 import { useAppDispatch, useAppSelector } from './redux'
-import useSwitchWallet from './useSwitchWallet'
 
 export const useAppStateChange = () => {
   const dispatch = useAppDispatch()
@@ -42,7 +43,6 @@ export const useAppStateChange = () => {
     s.addresses.status
   ])
   const restoreNavigationState = useRestoreNavigationState()
-  const switchWallet = useSwitchWallet()
 
   const unlockWallet = useCallback(async () => {
     const hasAvailableBiometrics = await isEnrolledAsync()
@@ -56,9 +56,9 @@ export const useAppStateChange = () => {
         dispatch(biometricsDisabled())
       }
 
-      const storedWallet = await getStoredActiveWallet()
+      const wallet = await getStoredActiveWallet()
 
-      if (!storedWallet) {
+      if (!wallet) {
         if (await areThereOtherWallets()) {
           navigateRootStack('SwitchWalletAfterDeletionScreen')
         } else if (lastNavigationState) {
@@ -69,14 +69,21 @@ export const useAppStateChange = () => {
         return
       }
 
-      if (storedWallet.authType === 'pin') {
-        navigateRootStack('LoginScreen', { walletIdToLogin: storedWallet.metadataId })
+      if (wallet.authType === 'pin') {
+        navigateRootStack('LoginScreen', { walletIdToLogin: wallet.metadataId, workflow: 'app-login' })
         return
       }
 
-      if (storedWallet.authType === 'biometrics') {
-        const requiresAddressInitialization = addressesStatus === 'uninitialized'
-        await switchWallet(storedWallet, requiresAddressInitialization)
+      if (wallet.authType === 'biometrics') {
+        await rememberActiveWallet(wallet.metadataId)
+
+        let addressesToInitialize = undefined
+
+        if (addressesStatus === 'uninitialized') {
+          addressesToInitialize = await deriveAddressesFromStoredMetadata(wallet.metadataId, wallet.mnemonic)
+        }
+
+        dispatch(unlockedWalletUsingBiometrics({ wallet, addressesToInitialize }))
 
         restoreNavigationState()
       }
@@ -91,7 +98,7 @@ export const useAppStateChange = () => {
         console.error(e)
       }
     }
-  }, [addressesStatus, dispatch, lastNavigationState, restoreNavigationState, switchWallet])
+  }, [addressesStatus, dispatch, lastNavigationState, restoreNavigationState])
 
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {

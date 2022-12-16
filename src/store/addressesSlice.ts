@@ -34,7 +34,13 @@ import { AddressToken } from '../types/tokens'
 import { PendingTransaction } from '../types/transactions'
 import { getRandomLabelColor } from '../utils/colors'
 import { extractNewTransactions, extractRemainingPendingTransactions } from '../utils/transactions'
-import { newWalletGenerated, walletUnlocked } from './activeWalletSlice'
+import {
+  newWalletGenerated,
+  switchedWalletsUsingPin,
+  switchedWalletsWithoutUsingPin,
+  unlockedWalletUsingBiometrics,
+  unlockedWalletUsingPin
+} from './activeWalletSlice'
 import { appReset } from './appSlice'
 import { customNetworkSettingsSaved, networkPresetSwitched } from './networkSlice'
 import { RootState } from './store'
@@ -167,6 +173,14 @@ const clearAddressesNetworkData = (state: AddressesState) => {
   state.status = 'uninitialized'
 }
 
+const flushState = (state: AddressesState, addressesToInitialize?: AddressPartial[]) => {
+  if (addressesToInitialize && addressesToInitialize.length > 0) {
+    addressesAdapter.setAll(state, [])
+    addressesAdapter.addMany(state, addressesToInitialize.map(getInitialAddressState))
+    state.status = 'uninitialized'
+  }
+}
+
 const addressesSlice = createSlice({
   name: sliceName,
   initialState,
@@ -220,15 +234,14 @@ const addressesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(walletUnlocked, (state, action) => {
-        const { addressesToInitialize } = action.payload
-
-        if (addressesToInitialize && addressesToInitialize.length > 0) {
-          addressesAdapter.setAll(state, [])
-          addressesAdapter.addMany(state, addressesToInitialize.map(getInitialAddressState))
-          state.status = 'uninitialized'
-        }
-      })
+      .addCase(switchedWalletsUsingPin, (state, action) => flushState(state, action.payload.addressesToInitialize))
+      .addCase(switchedWalletsWithoutUsingPin, (state, action) =>
+        flushState(state, action.payload.addressesToInitialize)
+      )
+      .addCase(unlockedWalletUsingBiometrics, (state, action) =>
+        flushState(state, action.payload.addressesToInitialize)
+      )
+      .addCase(unlockedWalletUsingPin, (state, action) => flushState(state, action.payload.addressesToInitialize))
       .addCase(newWalletGenerated, (state, action) => {
         const firstWalletAddress = getInitialAddressState({
           ...action.payload.firstAddress,

@@ -18,7 +18,13 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { ActiveWalletState, GeneratedWallet, WalletUnlockedPayload } from '../types/wallet'
+import {
+  ActiveWalletState,
+  GeneratedWallet,
+  SwitchedWalletUsingPinPayload,
+  WalletUnlockedUsingPinPayload,
+  WalletUnlockedWithoutUsingPinPayload
+} from '../types/wallet'
 import { appBecameInactive, appReset } from './appSlice'
 
 const sliceName = 'activeWallet'
@@ -58,17 +64,12 @@ const activeWalletSlice = createSlice({
       state.isMnemonicBackedUp = true
     },
     walletDeleted: resetState,
-    walletUnlocked: (_, action: PayloadAction<WalletUnlockedPayload>) => {
-      const { name, mnemonic, metadataId, isMnemonicBackedUp, authType } = action.payload
-
-      return {
-        name,
-        mnemonic,
-        authType,
-        metadataId,
-        isMnemonicBackedUp
-      }
-    }
+    switchedWalletsUsingPin: (_, action: PayloadAction<SwitchedWalletUsingPinPayload>) => action.payload.wallet,
+    switchedWalletsWithoutUsingPin: (_, action: PayloadAction<WalletUnlockedWithoutUsingPinPayload>) =>
+      action.payload.wallet,
+    unlockedWalletUsingPin: (_, action: PayloadAction<WalletUnlockedUsingPinPayload>) => action.payload.wallet,
+    unlockedWalletUsingBiometrics: (_, action: PayloadAction<WalletUnlockedWithoutUsingPinPayload>) =>
+      action.payload.wallet
   },
   extraReducers: (builder) => {
     builder.addCase(appBecameInactive, resetState).addCase(appReset, resetState)
@@ -81,7 +82,10 @@ export const {
   biometricsDisabled,
   mnemonicBackedUp,
   walletDeleted,
-  walletUnlocked
+  unlockedWalletUsingBiometrics,
+  switchedWalletsWithoutUsingPin,
+  switchedWalletsUsingPin,
+  unlockedWalletUsingPin
 } = activeWalletSlice.actions
 
 export default activeWalletSlice

@@ -91,7 +91,7 @@ const persistWallet = async (
   console.log(`💽 Storing pin-encrypted mnemonic of wallet with ID ${walletId}`)
   await SecureStore.setItemAsync(`wallet-${walletId}`, encryptedWithPinMnemonic)
 
-  await changeActiveWallet(walletId)
+  await rememberActiveWallet(walletId)
   await persistWalletsMetadata(walletsMetadata)
 
   return walletId
@@ -267,7 +267,7 @@ export const getWalletsMetadata = async (): Promise<WalletMetadata[]> => {
   return rawWalletsMetadata ? JSON.parse(rawWalletsMetadata) : []
 }
 
-export const changeActiveWallet = async (walletId: string) => {
+export const rememberActiveWallet = async (walletId: string) => {
   console.log(`💽 Updating active-wallet-id to ${walletId}`)
   await AsyncStorage.setItem('active-wallet-id', walletId)
 }

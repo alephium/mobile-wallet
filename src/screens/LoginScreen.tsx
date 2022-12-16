@@ -21,9 +21,10 @@ import { useCallback, useState } from 'react'
 
 import ConfirmWithAuthModal from '../components/ConfirmWithAuthModal'
 import Screen from '../components/layout/Screen'
-import { useAppSelector } from '../hooks/redux'
-import useSwitchWallet from '../hooks/useSwitchWallet'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
 import RootStackParamList from '../navigation/rootStackRoutes'
+import { deriveAddressesFromStoredMetadata, rememberActiveWallet } from '../persistent-storage/wallets'
+import { switchedWalletsUsingPin, unlockedWalletUsingPin } from '../store/activeWalletSlice'
 import { ActiveWalletState } from '../types/wallet'
 import { useRestoreNavigationState } from '../utils/navigation'
 
@@ -32,12 +33,12 @@ type ScreenProps = StackScreenProps<RootStackParamList, 'LoginScreen'>
 const LoginScreen = ({
   navigation,
   route: {
-    params: { walletIdToLogin, resetWalletOnLogin }
+    params: { walletIdToLogin, workflow }
   }
 }: ScreenProps) => {
   const restoreNavigationState = useRestoreNavigationState()
   const addressesStatus = useAppSelector((state) => state.addresses.status)
-  const switchWallet = useSwitchWallet()
+  const dispatch = useAppDispatch()
 
   const [isPinModalVisible, setIsPinModalVisible] = useState(true)
 
@@ -47,12 +48,26 @@ const LoginScreen = ({
 
       setIsPinModalVisible(false)
 
-      const requiresAddressInitialization = resetWalletOnLogin || addressesStatus === 'uninitialized'
-      await switchWallet(wallet, requiresAddressInitialization, pin)
+      await rememberActiveWallet(wallet.metadataId)
 
-      restoreNavigationState(resetWalletOnLogin)
+      if (workflow === 'wallet-switch') {
+        const addressesToInitialize = await deriveAddressesFromStoredMetadata(wallet.metadataId, wallet.mnemonic)
+
+        dispatch(switchedWalletsUsingPin({ wallet, addressesToInitialize, pin }))
+      } else if (workflow === 'app-login') {
+        let addressesToInitialize = undefined
+
+        if (addressesStatus === 'uninitialized') {
+          addressesToInitialize = await deriveAddressesFromStoredMetadata(wallet.metadataId, wallet.mnemonic)
+        }
+
+        dispatch(unlockedWalletUsingPin({ wallet, addressesToInitialize, pin }))
+      }
+
+      const resetNavigationState = workflow === 'wallet-switch'
+      restoreNavigationState(resetNavigationState)
     },
-    [addressesStatus, resetWalletOnLogin, restoreNavigationState, switchWallet]
+    [addressesStatus, dispatch, restoreNavigationState, workflow]
   )
 
   return (
