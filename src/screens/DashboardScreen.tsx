@@ -17,6 +17,7 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { StackScreenProps } from '@react-navigation/stack'
+import { ArrowUpDown } from 'lucide-react-native'
 import React from 'react'
 import { RefreshControl, StyleProp, ViewStyle } from 'react-native'
 import styled from 'styled-components/native'
@@ -24,6 +25,7 @@ import styled from 'styled-components/native'
 import AddressesTokensList from '~/components/AddressesTokensList'
 import AppText from '~/components/AppText'
 import BalanceSummary from '~/components/BalanceSummary'
+import Button from '~/components/buttons/Button'
 import { ScreenSection } from '~/components/layout/Screen'
 import ScrollScreen from '~/components/layout/ScrollScreen'
 import { useAppDispatch, useAppSelector } from '~/hooks/redux'
@@ -50,22 +52,29 @@ const DashboardScreen = ({ navigation, style }: ScreenProps) => {
   }
 
   return (
-    <DashboardScreenStyled refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refreshData} />}>
-      <ScreenSectionStyled>
-        <SurfaceHeader>
-          <AppText color="primary" semiBold size={30}>
-            {activeWalletName}
-          </AppText>
-          <ActiveNetwork>
-            <NetworkStatusBullet status={networkStatus} />
-            <AppText color="primary">{networkName}</AppText>
-          </ActiveNetwork>
-        </SurfaceHeader>
+    <>
+      <DashboardScreenStyled refreshControl={<RefreshControl refreshing={isLoading} onRefresh={refreshData} />}>
+        <ScreenSectionStyled>
+          <SurfaceHeader>
+            <AppText color="primary" semiBold size={30}>
+              {activeWalletName}
+            </AppText>
+            <ActiveNetwork>
+              <NetworkStatusBullet status={networkStatus} />
+              <AppText color="primary">{networkName}</AppText>
+            </ActiveNetwork>
+          </SurfaceHeader>
 
-        <BalanceSummaryStyled dateLabel="VALUE TODAY" />
-      </ScreenSectionStyled>
-      <AddressesTokensListStyled />
-    </DashboardScreenStyled>
+          <BalanceSummaryStyled dateLabel="VALUE TODAY" />
+        </ScreenSectionStyled>
+        <AddressesTokensListStyled />
+      </DashboardScreenStyled>
+      <FloatingButton Icon={ArrowUpDown} round color="white" onPress={() => navigation.navigate('SendNavigation')}>
+        <AppText semiBold size={15} color="white">
+          Send/Receive
+        </AppText>
+      </FloatingButton>
+    </>
   )
 }
 
@@ -108,4 +117,15 @@ const NetworkStatusBullet = styled.View<{ status: NetworkStatus }>`
 
 const BalanceSummaryStyled = styled(BalanceSummary)`
   padding: 34px 15px 0px;
+`
+
+// TODO: Dry
+const FloatingButton = styled(Button)`
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  background-color: ${({ theme }) => theme.global.accent};
+  /* width: 56px; */
+  width: auto;
+  height: 56px;
 `
