@@ -20,6 +20,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { ArrowUpDown } from 'lucide-react-native'
 import React from 'react'
 import { RefreshControl, StyleProp, ViewStyle } from 'react-native'
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated'
 import styled from 'styled-components/native'
 
 import AddressesTokensList from '~/components/AddressesTokensList'
@@ -28,6 +29,7 @@ import BalanceSummary from '~/components/BalanceSummary'
 import Button from '~/components/buttons/Button'
 import { ScreenSection } from '~/components/layout/Screen'
 import ScrollScreen from '~/components/layout/ScrollScreen'
+import { useScrollContext } from '~/contexts/ScrollContext'
 import { useAppDispatch, useAppSelector } from '~/hooks/redux'
 import InWalletTabsParamList from '~/navigation/inWalletRoutes'
 import RootStackParamList from '~/navigation/rootStackRoutes'
@@ -46,10 +48,19 @@ const DashboardScreen = ({ navigation, style }: ScreenProps) => {
   const activeWalletName = useAppSelector((s) => s.activeWallet.name)
   const networkStatus = useAppSelector((s) => s.network.status)
   const networkName = useAppSelector((s) => s.network.name)
+  const { scrollDirection } = useScrollContext()
 
   const refreshData = () => {
     if (!isLoading) dispatch(syncAddressesData(addressHashes))
   }
+
+  const animatedButtonStyle = useAnimatedStyle(() => ({
+    width: withTiming(scrollDirection?.value === 'down' ? 56 : 170)
+  }))
+
+  const animatedTextStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(scrollDirection?.value === 'down' ? 0 : 1)
+  }))
 
   return (
     <>
@@ -69,11 +80,15 @@ const DashboardScreen = ({ navigation, style }: ScreenProps) => {
         </ScreenSectionStyled>
         <AddressesTokensListStyled />
       </DashboardScreenStyled>
-      <FloatingButton Icon={ArrowUpDown} round color="white" onPress={() => navigation.navigate('SendNavigation')}>
-        <AppText semiBold size={15} color="white">
-          Send/Receive
-        </AppText>
-      </FloatingButton>
+      <AnimatedFloatingButton style={animatedButtonStyle}>
+        <FloatingButton Icon={ArrowUpDown} round color="white" onPress={() => navigation.navigate('SendNavigation')}>
+          <Animated.View style={animatedTextStyle}>
+            <AppText semiBold size={15} color="white" numberOfLines={1} ellipsizeMode="clip">
+              Send/Receive
+            </AppText>
+          </Animated.View>
+        </FloatingButton>
+      </AnimatedFloatingButton>
     </>
   )
 }
@@ -121,11 +136,16 @@ const BalanceSummaryStyled = styled(BalanceSummary)`
 
 // TODO: Dry
 const FloatingButton = styled(Button)`
+  background-color: ${({ theme }) => theme.global.accent};
+  width: auto;
+  height: 56px;
+  border-width: 1px;
+  justify-content: flex-start;
+  padding: 0 15px;
+`
+
+const AnimatedFloatingButton = styled(Animated.View)`
   position: absolute;
   bottom: 18px;
   right: 18px;
-  background-color: ${({ theme }) => theme.global.accent};
-  /* width: 56px; */
-  width: auto;
-  height: 56px;
 `
