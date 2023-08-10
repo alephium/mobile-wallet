@@ -94,7 +94,7 @@ const DestinationScreen = ({ navigation, style, route: { params } }: ScreenProps
   }, [setValue, toAddress])
 
   return (
-    <ScrollScreen style={style}>
+    <ScrollScreen style={[style, { paddingBottom: 80 }]}>
       <ScreenIntro
         title="Destination"
         subtitle="Send to a custom address, a contact, or one of you other addresses."

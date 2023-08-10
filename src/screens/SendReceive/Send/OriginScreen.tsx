@@ -57,7 +57,7 @@ const OriginScreen = ({ navigation, style, route: { params } }: ScreenProps) => 
   )
 
   return (
-    <ScrollScreen style={style}>
+    <ScrollScreen style={[style, { paddingBottom: 80 }]}>
       <ScreenIntro title="Origin" subtitle="Select the address from which to send the transaction." surtitle="SEND" />
       <ScreenSection>
         <AddressList>

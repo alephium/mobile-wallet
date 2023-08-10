@@ -20,7 +20,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import { StackHeaderProps } from '@react-navigation/stack'
 import { ChevronLeft } from 'lucide-react-native'
 import { useEffect, useState } from 'react'
-import { PressableProps } from 'react-native'
+import { Dimensions, PressableProps } from 'react-native'
 import { Bar as ProgressBar } from 'react-native-progress'
 import styled, { useTheme } from 'styled-components/native'
 
@@ -103,6 +103,11 @@ const ScreenHeaderStyled = styled(ScreenSection)`
   justify-content: space-between;
   padding-bottom: 16px;
   align-items: center;
+  position: absolute;
+  top: ${Dimensions.get('window').height - 180}px;
+  left: 0;
+  right: 0;
+  background-color: ${({ theme }) => theme.bg.primary};
 `
 
 export const BackButtonStyled = styled.Pressable`

@@ -67,7 +67,7 @@ const AssetsScreen = ({ navigation, style, route: { params } }: ScreenProps) => 
   if (!address) return null
 
   return (
-    <ScrollScreen style={style}>
+    <ScrollScreen style={[style, { paddingBottom: 80 }]}>
       <ScreenIntro
         title="Assets"
         subtitle="With Alephium, you can send multiple assets in one transaction."

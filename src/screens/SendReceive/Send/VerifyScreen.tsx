@@ -58,7 +58,7 @@ const VerifyScreen = ({ navigation, style }: ScreenProps) => {
   if (!fromAddress || !toAddress || assetAmounts.length < 1) return null
 
   return (
-    <ScrollScreen style={style}>
+    <ScrollScreen style={[style, { paddingBottom: 80 }]}>
       <ScreenIntro
         title="Verify"
         subtitle="Please, double check that everything is correct before sending."

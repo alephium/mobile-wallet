@@ -48,7 +48,7 @@ const QRCodeScreen = ({ navigation, route: { params } }: ScreenProps) => {
   }, [navigation])
 
   return (
-    <ScrollView>
+    <ScrollView style={{ paddingBottom: 80 }}>
       <ScreenIntro title="Scan" subtitle="Scan the QR code to send funds to this address." surtitle="RECEIVE" />
       <CenteredScreenSection>
         <QRCode size={200} bgColor={theme.bg.secondary} fgColor={theme.font.primary} value={params.addressHash} />

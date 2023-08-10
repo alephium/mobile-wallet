@@ -36,7 +36,7 @@ const AddressScreen = ({ navigation, style }: ScreenProps) => {
   const addresses = useAppSelector(selectAllAddresses)
 
   return (
-    <ScrollScreen style={style}>
+    <ScrollScreen style={[style, { paddingBottom: 80 }]}>
       <ScreenIntro
         title="Your addresses"
         subtitle="Select the address which you want to receive funds to."
