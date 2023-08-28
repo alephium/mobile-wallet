@@ -16,7 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { StyleProp, TextStyle, View, ViewStyle } from 'react-native'
+import { StyleProp, TextStyle, TouchableNativeFeedback, View, ViewStyle } from 'react-native'
 import styled from 'styled-components/native'
 
 import AppText from '~/components/AppText'
@@ -24,6 +24,7 @@ import { useAppSelector } from '~/hooks/redux'
 import DefaultAddressBadge from '~/images/DefaultAddressBadge'
 import { selectAddressByHash } from '~/store/addressesSlice'
 import { AddressHash } from '~/types/addresses'
+import { copyAddressToClipboard } from '~/utils/addresses'
 
 interface AddressBadgeProps {
   addressHash: AddressHash
@@ -36,34 +37,36 @@ const AddressBadge = ({ addressHash, hideSymbol = false, textStyle, style }: Add
   const address = useAppSelector((s) => selectAddressByHash(s, addressHash))
 
   return (
-    <View style={style}>
-      {!address ? (
-        <Label numberOfLines={1} ellipsizeMode="middle" style={textStyle}>
-          {addressHash}
-        </Label>
-      ) : (
-        <>
-          {!hideSymbol && (
-            <Symbol>
-              {address.settings.isDefault ? (
-                <DefaultAddressBadge size={16} color={address.settings.color} />
-              ) : (
-                <Dot color={address.settings.color} />
-              )}
-            </Symbol>
-          )}
-          {address.settings.label ? (
-            <Label numberOfLines={1} style={textStyle}>
-              {address.settings.label}
-            </Label>
-          ) : (
-            <Label numberOfLines={1} ellipsizeMode="middle" style={textStyle}>
-              {address.hash}
-            </Label>
-          )}
-        </>
-      )}
-    </View>
+    <TouchableNativeFeedback onLongPress={() => copyAddressToClipboard(addressHash)}>
+      <View style={style}>
+        {!address ? (
+          <Label numberOfLines={1} ellipsizeMode="middle" style={textStyle}>
+            {addressHash}
+          </Label>
+        ) : (
+          <>
+            {!hideSymbol && (
+              <Symbol>
+                {address.settings.isDefault ? (
+                  <DefaultAddressBadge size={16} color={address.settings.color} />
+                ) : (
+                  <Dot color={address.settings.color} />
+                )}
+              </Symbol>
+            )}
+            {address.settings.label ? (
+              <Label numberOfLines={1} style={textStyle}>
+                {address.settings.label}
+              </Label>
+            ) : (
+              <Label numberOfLines={1} ellipsizeMode="middle" style={textStyle}>
+                {address.hash}
+              </Label>
+            )}
+          </>
+        )}
+      </View>
+    </TouchableNativeFeedback>
   )
 }
 
