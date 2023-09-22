@@ -1,0 +1,404 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/x86_64/libreact_codegen_safeareacontext.so"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"target_link_libraries",
+			"add_compile_options",
+			"target_compile_options",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 40,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 58,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 31,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-fexceptions"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-frtti"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-std=c++17"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wall"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wpedantic"
+				},
+				{
+					"backtrace" : 3,
+					"fragment" : "-Wno-gnu-zero-variadic-macro-arguments"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-DLOG_TAG=\\\"ReactNative\\\""
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_NO_CONFIG=1"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_HAVE_CLOCK_GETTIME=1"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_USE_LIBCPP=1"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_MOBILE=1"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_HAVE_RECVMMSG=1"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_HAVE_PTHREAD=1"
+				},
+				{
+					"backtrace" : 2,
+					"fragment" : "-DFOLLY_HAVE_XSI_STRERROR_R=1"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"define" : "react_codegen_safeareacontext_EXPORTS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/."
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/../../../../common/cpp"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/../../../build/generated/source/codegen/jni"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/../../../build/generated/source/codegen/jni/react/renderer/components/safeareacontext"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_mapbuffer/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/include"
+				},
+				{
+					"backtrace" : 2,
+					"isSystem" : true,
+					"path" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			],
+			"sysroot" : 
+			{
+				"path" : "/Users/mika/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot"
+			}
+		}
+	],
+	"id" : "react_codegen_safeareacontext::@7984cd80db47aa7b952a",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "-Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.x86_64/libfbjni.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.x86_64/libfolly_runtime.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.x86_64/libglog.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.x86_64/libjsi.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.x86_64/libreact_codegen_rncore.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.x86_64/libreact_debug.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.x86_64/libreact_nativemodule_core.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.x86_64/libreact_render_core.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.x86_64/libreact_render_debug.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.x86_64/libreact_render_graphics.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_mapbuffer/libs/android.x86_64/libreact_render_mapbuffer.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.x86_64/librrc_view.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.x86_64/libturbomodulejsijni.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.x86_64/libyoga.so",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "-latomic -lm",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX",
+		"sysroot" : 
+		{
+			"path" : "/Users/mika/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/sysroot"
+		}
+	},
+	"name" : "react_codegen_safeareacontext",
+	"nameOnDisk" : "libreact_codegen_safeareacontext.so",
+	"paths" : 
+	{
+		"build" : "safeareacontext_autolinked_build",
+		"source" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/common/cpp/react/renderer/components/safeareacontext/RNCSafeAreaViewShadowNode.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/common/cpp/react/renderer/components/safeareacontext/RNCSafeAreaViewState.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/EventEmitters.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/Props.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/ShadowNodes.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/States.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/safeareacontextJSI-generated.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/safeareacontext-generated.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "SHARED_LIBRARY"
+}

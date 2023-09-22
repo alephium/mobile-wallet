@@ -1,0 +1,183 @@
+{
+  "buildFiles": [
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-pager-view/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt",
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt",
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-svg/android/build/generated/source/codegen/jni/CMakeLists.txt",
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/mika/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/.cxx/Debug/49205d37/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/mika/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/.cxx/Debug/49205d37/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "appmodules::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "appmodules",
+      "output": "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libappmodules.so",
+      "runtimeFiles": [
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/fabricjni/libs/android.arm64-v8a/libfabricjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_newarchdefaults/libs/android.arm64-v8a/libreact_newarchdefaults.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_componentregistry/libs/android.arm64-v8a/libreact_render_componentregistry.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_legacyviewmanagerinterop/libs/android.arm64-v8a/librrc_legacyviewmanagerinterop.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/runtimeexecutor/libs/android.arm64-v8a/libruntimeexecutor.so",
+        "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_rngesturehandler_codegen.so",
+        "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_RNCViewPager.so",
+        "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_safeareacontext.so",
+        "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_rnscreens.so",
+        "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_rnsvg.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_mapbuffer/libs/android.arm64-v8a/libreact_render_mapbuffer.so",
+        "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.arm64-v8a/libfolly_runtime.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.arm64-v8a/libglog.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.arm64-v8a/libreact_codegen_rncore.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.arm64-v8a/libreact_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.arm64-v8a/libreact_nativemodule_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.arm64-v8a/libreact_render_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.arm64-v8a/libreact_render_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.arm64-v8a/libreact_render_graphics.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_imagemanager/libs/android.arm64-v8a/libreact_render_imagemanager.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_image/libs/android.arm64-v8a/librrc_image.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.arm64-v8a/librrc_view.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.arm64-v8a/libturbomodulejsijni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.arm64-v8a/libyoga.so"
+      ]
+    },
+    "react_codegen_RNCViewPager::@9f68986783bbdbca59bc": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "react_codegen_RNCViewPager",
+      "output": "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_RNCViewPager.so",
+      "runtimeFiles": [
+        "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.arm64-v8a/libfolly_runtime.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.arm64-v8a/libglog.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.arm64-v8a/libreact_codegen_rncore.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.arm64-v8a/libreact_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.arm64-v8a/libreact_nativemodule_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.arm64-v8a/libreact_render_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.arm64-v8a/libreact_render_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.arm64-v8a/libreact_render_graphics.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_imagemanager/libs/android.arm64-v8a/libreact_render_imagemanager.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_image/libs/android.arm64-v8a/librrc_image.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.arm64-v8a/librrc_view.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.arm64-v8a/libturbomodulejsijni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.arm64-v8a/libyoga.so"
+      ]
+    },
+    "react_codegen_rngesturehandler_codegen::@39f233abcd2c728bc6ec": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "react_codegen_rngesturehandler_codegen",
+      "output": "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_rngesturehandler_codegen.so",
+      "runtimeFiles": [
+        "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.arm64-v8a/libfolly_runtime.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.arm64-v8a/libglog.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.arm64-v8a/libreact_codegen_rncore.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.arm64-v8a/libreact_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.arm64-v8a/libreact_nativemodule_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.arm64-v8a/libreact_render_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.arm64-v8a/libreact_render_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.arm64-v8a/libreact_render_graphics.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_imagemanager/libs/android.arm64-v8a/libreact_render_imagemanager.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_image/libs/android.arm64-v8a/librrc_image.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.arm64-v8a/librrc_view.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.arm64-v8a/libturbomodulejsijni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.arm64-v8a/libyoga.so"
+      ]
+    },
+    "react_codegen_rnscreens::@25bcbd507e98d3a854ad": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "react_codegen_rnscreens",
+      "output": "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_rnscreens.so",
+      "runtimeFiles": [
+        "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.arm64-v8a/libfolly_runtime.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.arm64-v8a/libglog.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.arm64-v8a/libreact_codegen_rncore.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.arm64-v8a/libreact_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.arm64-v8a/libreact_nativemodule_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.arm64-v8a/libreact_render_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.arm64-v8a/libreact_render_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.arm64-v8a/libreact_render_graphics.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_mapbuffer/libs/android.arm64-v8a/libreact_render_mapbuffer.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.arm64-v8a/librrc_view.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.arm64-v8a/libturbomodulejsijni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.arm64-v8a/libyoga.so"
+      ]
+    },
+    "react_codegen_rnsvg::@4f40eb209d0c0b4a3b65": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "react_codegen_rnsvg",
+      "output": "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_rnsvg.so",
+      "runtimeFiles": [
+        "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.arm64-v8a/libfolly_runtime.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.arm64-v8a/libglog.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.arm64-v8a/libreact_codegen_rncore.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.arm64-v8a/libreact_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.arm64-v8a/libreact_nativemodule_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.arm64-v8a/libreact_render_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.arm64-v8a/libreact_render_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.arm64-v8a/libreact_render_graphics.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_imagemanager/libs/android.arm64-v8a/libreact_render_imagemanager.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_image/libs/android.arm64-v8a/librrc_image.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.arm64-v8a/librrc_view.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.arm64-v8a/libturbomodulejsijni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.arm64-v8a/libyoga.so"
+      ]
+    },
+    "react_codegen_safeareacontext::@7984cd80db47aa7b952a": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "react_codegen_safeareacontext",
+      "output": "/Users/mika/Documents/Projects/Alephium/mobile-wallet/android/app/build/intermediates/cxx/Debug/49205d37/obj/arm64-v8a/libreact_codegen_safeareacontext.so",
+      "runtimeFiles": [
+        "/Users/mika/.gradle/caches/transforms-3/7b3f20f0dbd46d169d6d2185bc3853c7/transformed/jetified-fbjni-0.3.0/prefab/modules/fbjni/libs/android.arm64-v8a/libfbjni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/folly_runtime/libs/android.arm64-v8a/libfolly_runtime.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/glog/libs/android.arm64-v8a/libglog.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/jsi/libs/android.arm64-v8a/libjsi.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_codegen_rncore/libs/android.arm64-v8a/libreact_codegen_rncore.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_debug/libs/android.arm64-v8a/libreact_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_nativemodule_core/libs/android.arm64-v8a/libreact_nativemodule_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_core/libs/android.arm64-v8a/libreact_render_core.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_debug/libs/android.arm64-v8a/libreact_render_debug.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_graphics/libs/android.arm64-v8a/libreact_render_graphics.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/react_render_mapbuffer/libs/android.arm64-v8a/libreact_render_mapbuffer.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/rrc_view/libs/android.arm64-v8a/librrc_view.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/turbomodulejsijni/libs/android.arm64-v8a/libturbomodulejsijni.so",
+        "/Users/mika/.gradle/caches/transforms-3/5cb291caf634996cc82f1438102204ec/transformed/jetified-react-android-0.72.3-debug/prefab/modules/yoga/libs/android.arm64-v8a/libyoga.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/mika/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/mika/Library/Android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

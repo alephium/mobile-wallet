@@ -1,0 +1,6 @@
+/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-gesture-handler/android/build/generated/source/codegen/jni/CMakeLists.txt
+/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-pager-view/android/build/generated/source/codegen/jni/CMakeLists.txt
+/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-safe-area-context/android/src/main/jni/CMakeLists.txt
+/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-screens/android/src/main/jni/CMakeLists.txt
+/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native-svg/android/build/generated/source/codegen/jni/CMakeLists.txt
+/Users/mika/Documents/Projects/Alephium/mobile-wallet/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup/CMakeLists.txt

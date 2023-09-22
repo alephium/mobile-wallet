@@ -57,7 +57,10 @@ export default {
             newArchEnabled: true
           },
           android: {
-            newArchEnabled: true
+            compileSdkVersion: 33,
+            targetSdkVersion: 33,
+            buildToolsVersion: '33.0.0',
+            newArchEnabled: false
           }
         }
       ],
