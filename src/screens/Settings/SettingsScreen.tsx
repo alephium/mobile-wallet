@@ -26,8 +26,8 @@ import { useTheme } from 'styled-components'
 import styled from 'styled-components/native'
 
 import AppText from '~/components/AppText'
+import AuthenticationModal from '~/components/AuthenticationModal'
 import Button from '~/components/buttons/Button'
-import ConfirmWithAuthModal from '~/components/ConfirmWithAuthModal'
 import BottomModal from '~/components/layout/BottomModal'
 import BoxSurface from '~/components/layout/BoxSurface'
 import { ModalContent } from '~/components/layout/ModalContent'
@@ -79,7 +79,7 @@ const SettingsScreen = ({ navigation, ...props }: ScreenProps) => {
   const [isMnemonicModalVisible, setIsMnemonicModalVisible] = useState(false)
   const [isSafePlaceWarningModalOpen, setIsSafePlaceWarningModalOpen] = useState(false)
   const [isThemeSwitchOverlayVisible, setIsThemeSwitchOverlayVisible] = useState(false)
-  const [authCallback, setAuthCallback] = useState<() => void>(() => null)
+  const [authCallback, setAuthCallback] = useState<() => void>(() => () => null)
 
   const toggleBiometrics = async () => {
     if (isBiometricsEnabled) {
@@ -235,16 +235,15 @@ const SettingsScreen = ({ navigation, ...props }: ScreenProps) => {
         </ScreenSection>
       </ScrollScreenStyled>
 
-      {isAuthenticationModalVisible && (
-        <ConfirmWithAuthModal
-          onConfirm={() => {
-            setIsAuthenticationModalOpen(false)
-            authCallback()
-            setAuthCallback(() => () => null)
-          }}
-          onClose={() => setIsAuthenticationModalOpen(false)}
-        />
-      )}
+      <AuthenticationModal
+        visible={isAuthenticationModalVisible}
+        onConfirm={() => {
+          setIsAuthenticationModalOpen(false)
+          authCallback()
+          setAuthCallback(() => () => null)
+        }}
+        onClose={() => setIsAuthenticationModalOpen(false)}
+      />
 
       <ModalWithBackdrop animationType="fade" visible={isThemeSwitchOverlayVisible} color="black" />
 
