@@ -96,10 +96,16 @@ const TabBarPager = ({ pages, tabLabels, headerTitle, ...props }: TabBarScreenPr
 
   return (
     <>
+      <BaseHeader
+        options={{ headerTitle }}
+        scrollY={screenScrollY}
+        showCompactComponents
+        headerBottom={() => <TabBar />}
+      />
       <AnimatedPagerView
         initialPage={0}
         onPageScroll={pageScrollHandler}
-        style={{ flex: 1, backgroundColor: theme.bg.back2 }}
+        style={{ flex: 1, backgroundColor: theme.bg.back2, overflow: 'visible' }}
         ref={pagerRef}
         {...props}
       >
@@ -114,13 +120,6 @@ const TabBarPager = ({ pages, tabLabels, headerTitle, ...props }: TabBarScreenPr
           />
         ))}
       </AnimatedPagerView>
-
-      <BaseHeader
-        options={{ headerTitle }}
-        scrollY={screenScrollY}
-        showCompactComponents
-        headerBottom={() => <TabBar />}
-      />
     </>
   )
 }
@@ -139,17 +138,4 @@ const WrappedPage = ({
   index: number
   pagerScrollEvent: SharedValue<PagerViewOnPageScrollEventData>
   tabBarPageY: SharedValue<number>
-}) => {
-  const insets = useSafeAreaInsets()
-
-  const pageAnimatedStyle = useAnimatedStyle(() => ({
-    paddingTop: tabBarPageY.value + insets.top + DEFAULT_MARGIN
-  }))
-
-  return (
-    <Page
-      contentStyle={pagerScrollEvent.value.position !== index ? pageAnimatedStyle : [{ paddingTop: 190 }]}
-      onScroll={onScroll}
-    />
-  )
-}
+}) => <Page contentStyle={{ overflow: 'visible' }} onScroll={onScroll} />

@@ -42,19 +42,7 @@ const Screen = ({ children, hasNavigationHeader, headerOptions, style, ...props 
   const HeaderComponent = headerOptions?.type === 'stack' ? StackHeader : BaseHeader
 
   return (
-    <ScreenStyled
-      style={[
-        {
-          paddingTop: headerOptions
-            ? screenHeaderHeight + DEFAULT_MARGIN
-            : hasNavigationHeader
-            ? headerheight + DEFAULT_MARGIN
-            : 0
-        },
-        style
-      ]}
-      {...props}
-    >
+    <ScreenStyled style={style} {...props}>
       {headerOptions && (
         <HeaderComponent
           goBack={navigation.canGoBack() ? navigation.goBack : undefined}
@@ -69,6 +57,7 @@ const Screen = ({ children, hasNavigationHeader, headerOptions, style, ...props 
 
 const ScreenStyled = styled.View<ScreenProps>`
   flex: 1;
+  overflow: visible;
   background-color: ${({ theme, contrastedBg }) =>
     contrastedBg ? (theme.name === 'light' ? theme.bg.highlight : theme.bg.back2) : theme.bg.back1};
 `

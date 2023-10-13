@@ -71,7 +71,15 @@ const ScrollScreen = ({
   const HeaderComponent = headerOptions?.type === 'stack' ? StackHeader : BaseHeader
 
   const screen = (
-    <Screen style={containerStyle} contrastedBg={contrastedBg}>
+    <Screen style={[containerStyle, { overflow: 'visible' }]} contrastedBg={contrastedBg}>
+      {headerOptions && (
+        <HeaderComponent
+          goBack={navigation.canGoBack() ? navigation.goBack : undefined}
+          options={headerOptions}
+          scrollY={screenScrollY}
+          onLayout={screenHeaderLayoutHandler}
+        />
+      )}
       <ScrollView
         ref={viewRef}
         scrollEventThrottle={16}
@@ -80,13 +88,9 @@ const ScrollScreen = ({
         onScrollEndDrag={scrollEndHandler}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        style={{ overflow: 'visible' }}
         contentContainerStyle={[
           {
-            paddingTop: headerOptions
-              ? screenHeaderHeight + DEFAULT_MARGIN
-              : hasNavigationHeader
-              ? headerheight + DEFAULT_MARGIN
-              : 0,
             flexGrow: fill ? 1 : undefined
           },
           contentContainerStyle
@@ -106,14 +110,6 @@ const ScrollScreen = ({
           {children}
         </View>
       </ScrollView>
-      {headerOptions && (
-        <HeaderComponent
-          goBack={navigation.canGoBack() ? navigation.goBack : undefined}
-          options={headerOptions}
-          scrollY={screenScrollY}
-          onLayout={screenHeaderLayoutHandler}
-        />
-      )}
     </Screen>
   )
 

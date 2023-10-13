@@ -54,6 +54,9 @@ const FlatListScreen = <T,>({
 
   return (
     <Screen contrastedBg={contrastedBg}>
+      {headerOptions && (
+        <BaseHeader options={headerOptions} scrollY={screenScrollY} onLayout={screenHeaderLayoutHandler} />
+      )}
       <FlatList
         ref={flatListRef}
         onScroll={hasNavigationHeader ? navigationScrollHandler : screenScrollHandler}
@@ -75,9 +78,6 @@ const FlatListScreen = <T,>({
         style={style}
         {...props}
       />
-      {headerOptions && (
-        <BaseHeader options={headerOptions} scrollY={screenScrollY} onLayout={screenHeaderLayoutHandler} />
-      )}
     </Screen>
   )
 }

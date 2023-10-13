@@ -236,10 +236,9 @@ const BaseHeader = ({
 export default BaseHeader
 
 const BaseHeaderStyled = styled(Animated.View)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
+  height: 170px;
+  z-index: 1;
 `
 
 const ExpandedHeaderContainer = styled(Animated.View)`
