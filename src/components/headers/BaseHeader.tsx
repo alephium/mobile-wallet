@@ -237,7 +237,6 @@ export default BaseHeader
 
 const BaseHeaderStyled = styled(Animated.View)`
   width: 100%;
-  height: 170px;
   z-index: 1;
 `
 

@@ -16,9 +16,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { useHeaderHeight } from '@react-navigation/elements'
 import { useNavigation } from '@react-navigation/native'
-import { useState } from 'react'
 import { ViewProps } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
@@ -34,21 +32,14 @@ export interface ScreenProps extends ViewProps {
 }
 
 const Screen = ({ children, hasNavigationHeader, headerOptions, style, ...props }: ScreenProps) => {
-  const headerheight = useHeaderHeight()
   const navigation = useNavigation()
-
-  const [screenHeaderHeight, setScreenHeaderHeight] = useState(182)
 
   const HeaderComponent = headerOptions?.type === 'stack' ? StackHeader : BaseHeader
 
   return (
     <ScreenStyled style={style} {...props}>
       {headerOptions && (
-        <HeaderComponent
-          goBack={navigation.canGoBack() ? navigation.goBack : undefined}
-          options={headerOptions}
-          onLayout={(e) => setScreenHeaderHeight(e.nativeEvent.layout.height)}
-        />
+        <HeaderComponent goBack={navigation.canGoBack() ? navigation.goBack : undefined} options={headerOptions} />
       )}
       {children}
     </ScreenStyled>
@@ -57,7 +48,6 @@ const Screen = ({ children, hasNavigationHeader, headerOptions, style, ...props 
 
 const ScreenStyled = styled.View<ScreenProps>`
   flex: 1;
-  overflow: visible;
   background-color: ${({ theme, contrastedBg }) =>
     contrastedBg ? (theme.name === 'light' ? theme.bg.highlight : theme.bg.back2) : theme.bg.back1};
 `

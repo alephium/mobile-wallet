@@ -16,7 +16,6 @@ You should have received a copy of the GNU Lesser General Public License
 along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { useHeaderHeight } from '@react-navigation/elements'
 import { useNavigation } from '@react-navigation/native'
 import { RefObject, useRef } from 'react'
 import { KeyboardAvoidingView, ScrollView, ScrollViewProps, StyleProp, View, ViewStyle } from 'react-native'
@@ -59,19 +58,18 @@ const ScrollScreen = ({
   const viewRef = useRef<ScrollView>(null)
   const navigation = useNavigation()
 
-  const headerheight = useHeaderHeight()
   const navigationScrollHandler = useNavigationScrollHandler(viewRef)
   const scrollEndHandler = useAutoScrollOnDragEnd(viewRef)
   const insets = useSafeAreaInsets()
 
   useScrollToTopOnBlur(viewRef)
 
-  const { screenScrollY, screenHeaderHeight, screenScrollHandler, screenHeaderLayoutHandler } = useScreenScrollHandler()
+  const { screenScrollY, screenScrollHandler, screenHeaderLayoutHandler } = useScreenScrollHandler()
 
   const HeaderComponent = headerOptions?.type === 'stack' ? StackHeader : BaseHeader
 
   const screen = (
-    <Screen style={[containerStyle, { overflow: 'visible' }]} contrastedBg={contrastedBg}>
+    <Screen style={containerStyle} contrastedBg={contrastedBg}>
       {headerOptions && (
         <HeaderComponent
           goBack={navigation.canGoBack() ? navigation.goBack : undefined}
@@ -86,8 +84,6 @@ const ScrollScreen = ({
         alwaysBounceVertical={true}
         onScroll={hasNavigationHeader ? navigationScrollHandler : screenScrollHandler}
         onScrollEndDrag={scrollEndHandler}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
         style={{ overflow: 'visible' }}
         contentContainerStyle={[
           {

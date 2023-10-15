@@ -24,12 +24,9 @@ import Animated, {
   AnimateProps,
   measure,
   runOnJS,
-  SharedValue,
   useAnimatedRef,
-  useAnimatedStyle,
   useSharedValue
 } from 'react-native-reanimated'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTheme } from 'styled-components/native'
 
 import BaseHeader from '~/components/headers/BaseHeader'
@@ -37,7 +34,6 @@ import TopTabBar from '~/components/TopTabBar'
 import useNavigationScrollHandler from '~/hooks/layout/useNavigationScrollHandler'
 import useScreenScrollHandler from '~/hooks/layout/useScreenScrollHandler'
 import useTabScrollHandler from '~/hooks/layout/useTabScrollHandler'
-import { DEFAULT_MARGIN } from '~/style/globalStyle'
 
 export interface TabBarPageProps extends AnimatedScrollViewProps {
   contentStyle?: AnimateProps<ScrollViewProps>['style']
@@ -110,14 +106,7 @@ const TabBarPager = ({ pages, tabLabels, headerTitle, ...props }: TabBarScreenPr
         {...props}
       >
         {pages.map((Page, i) => (
-          <WrappedPage
-            index={i}
-            key={i}
-            Page={Page}
-            onScroll={screenScrollHandler}
-            pagerScrollEvent={pagerScrollEvent}
-            tabBarPageY={tabBarPageY}
-          />
+          <WrappedPage key={i} Page={Page} onScroll={screenScrollHandler} />
         ))}
       </AnimatedPagerView>
     </>
@@ -128,14 +117,8 @@ export default TabBarPager
 
 const WrappedPage = ({
   Page,
-  onScroll,
-  index,
-  pagerScrollEvent,
-  tabBarPageY
+  onScroll
 }: {
   Page: (props: TabBarPageProps) => ReactNode
   onScroll: Required<TabBarPageProps>['onScroll']
-  index: number
-  pagerScrollEvent: SharedValue<PagerViewOnPageScrollEventData>
-  tabBarPageY: SharedValue<number>
-}) => <Page contentStyle={{ overflow: 'visible' }} onScroll={onScroll} />
+}) => <Page onScroll={onScroll} />
