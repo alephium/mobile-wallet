@@ -58,7 +58,6 @@ const AssetRow = ({ asset, style, isLast }: AssetRowProps) => {
       : ''
   )
   const [error, setError] = useState('')
-  const [inputFontSize, setInputFontSize] = useState(23)
 
   const minAmountInAlph = toHumanReadableAmount(MIN_UTXO_SET_AMOUNT)
 
@@ -67,19 +66,7 @@ const AssetRow = ({ asset, style, isLast }: AssetRowProps) => {
 
     const cleanedAmount = isNumericStringValid(inputAmount, true) ? inputAmount : ''
 
-    setAmount((prevAmount) => {
-      const amountLength = cleanedAmount.length
-
-      if (amountLength >= 10) {
-        if (amountLength < 20) {
-          setInputFontSize((prevSize) => prevSize + (prevAmount.length - amountLength))
-        }
-      } else {
-        setInputFontSize(23)
-      }
-
-      return cleanedAmount
-    })
+    setAmount(cleanedAmount)
 
     const amountValueAsFloat = parseFloat(cleanedAmount)
     const tooManyDecimals = getNumberOfDecimals(cleanedAmount) > (asset?.decimals ?? 0)
@@ -190,8 +177,10 @@ const AssetRow = ({ asset, style, isLast }: AssetRowProps) => {
                 onChangeText={handleOnAmountChange}
                 keyboardType="number-pad"
                 inputMode="decimal"
+                multiline={true}
+                numberOfLines={2}
+                textAlignVertical="center"
                 ref={inputRef}
-                style={{ fontSize: inputFontSize }}
               />
             </AmountInputValue>
             {!assetIsNft && (
@@ -252,6 +241,8 @@ const AmountTextInput = styled(TextInput)`
   color: ${({ theme }) => theme.font.primary};
   font-weight: 600;
   text-align: right;
+  font-size: 23px;
+  margin-top: -5px;
 `
 
 const CheckmarkContainer = styled.View`
