@@ -30,14 +30,12 @@ import { customNetworkSettingsSaved, networkPresetSwitched } from '~/store/netwo
 interface FungibleTokensState extends EntityState<AssetInfo> {
   loading: boolean
   status: 'initialized' | 'uninitialized'
-  checkedUnknownTokenIds: AssetInfo['id'][]
 }
 
 const initialState: FungibleTokensState = fungibleTokensAdapter.addOne(
   fungibleTokensAdapter.getInitialState({
     loading: false,
-    status: 'uninitialized',
-    checkedUnknownTokenIds: []
+    status: 'uninitialized'
   }),
   {
     ...ALPH,
@@ -71,9 +69,6 @@ const assetsSlice = createSlice({
       })
       .addCase(syncUnknownTokensInfo.fulfilled, (state, action) => {
         const metadata = action.payload.tokens
-        const initiallyUnknownTokenIds = action.meta.arg
-
-        state.checkedUnknownTokenIds = [...initiallyUnknownTokenIds, ...state.checkedUnknownTokenIds]
 
         if (metadata) {
           fungibleTokensAdapter.upsertMany(

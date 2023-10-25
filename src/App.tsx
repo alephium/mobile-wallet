@@ -108,7 +108,7 @@ const Main = ({ children, ...props }: ViewProps) => {
   const selectAddressesUnknownTokens = useMemo(makeSelectAddressesUnknownTokens, [])
   const addressUnknownTokenIds = useAppSelector(selectAddressesUnknownTokens)
   const txUnknownTokenIds = useAppSelector(selectTransactionUnknownTokenIds)
-  const checkedUnknownTokenIds = useAppSelector((s) => s.fungibleTokens.checkedUnknownTokenIds)
+  const checkedUnknownTokenIds = useAppSelector((s) => s.app.checkedUnknownTokenIds)
   const newUnknownTokens = difference(union(addressUnknownTokenIds, txUnknownTokenIds), checkedUnknownTokenIds)
 
   useLoadStoredSettings()

@@ -479,7 +479,7 @@ export const makeSelectAddressesUnknownTokens = () =>
 // TODO: Same as in desktop wallet
 export const makeSelectAddressesCheckedUnknownTokens = () =>
   createSelector(
-    [makeSelectAddressesUnknownTokens(), (state: RootState) => state.fungibleTokens.checkedUnknownTokenIds],
+    [makeSelectAddressesUnknownTokens(), (state: RootState) => state.app.checkedUnknownTokenIds],
     (tokensWithoutMetadata, checkedUnknownTokenIds) =>
       tokensWithoutMetadata.filter((tokenId) => checkedUnknownTokenIds.includes(tokenId))
   )
