@@ -40,7 +40,7 @@ import {
 import { syncingAddressDataStarted } from '~/store/addresses/addressesActions'
 import { balanceHistoryAdapter } from '~/store/addresses/addressesAdapter'
 import { appReset } from '~/store/appSlice'
-import { selectAllAssetsInfo, selectAllNFTs, selectNFTIds } from '~/store/assets/assetsSelectors'
+import { selectAllFungibleTokens, selectAllNFTs, selectNFTIds } from '~/store/assets/assetsSelectors'
 import { customNetworkSettingsSaved, networkPresetSwitched } from '~/store/networkSlice'
 import { RootState } from '~/store/store'
 import { extractNewTransactionHashes, getTransactionsOfAddress } from '~/store/transactions/transactionUtils'
@@ -400,7 +400,7 @@ export const {
   selectIds: selectAddressIds
 } = addressesAdapter.getSelectors<RootState>((state) => state[sliceName])
 
-// TODO: Same as in desktop walelt
+// TODO: Same as in desktop wallet
 export const makeSelectAddressesAlphAsset = () =>
   createSelector(makeSelectAddresses(), (addresses): Asset => {
     const alphBalances = addresses.reduce(
@@ -418,13 +418,13 @@ export const makeSelectAddressesAlphAsset = () =>
     }
   })
 
-// TODO: Same as in desktop walelt
+// TODO: Same as in desktop wallet
 export const makeSelectAddressesTokens = () =>
   createSelector(
-    [selectAllAssetsInfo, selectAllNFTs, makeSelectAddressesAlphAsset(), makeSelectAddresses()],
-    (assetsInfo, nfts, alphAsset, addresses): Asset[] => {
+    [selectAllFungibleTokens, selectAllNFTs, makeSelectAddressesAlphAsset(), makeSelectAddresses()],
+    (fungibleTokens, nfts, alphAsset, addresses): Asset[] => {
       const tokens = getAddressesTokenBalances(addresses).reduce((acc, token) => {
-        const assetInfo = assetsInfo.find((t) => t.id === token.id)
+        const assetInfo = fungibleTokens.find((t) => t.id === token.id)
         const nftInfo = nfts.find((nft) => nft.id === token.id)
 
         acc.push({
@@ -449,17 +449,17 @@ export const makeSelectAddressesTokens = () =>
     }
   )
 
-// TODO: Same as in desktop walelt
+// TODO: Same as in desktop wallet
 export const makeSelectAddressesKnownFungibleTokens = () =>
   createSelector([makeSelectAddressesTokens()], (tokens): Asset[] => tokens.filter((token) => !!token?.symbol))
 
-// TODO: Same as in desktop walelt
+// TODO: Same as in desktop wallet
 export const makeSelectAddressesUnknownTokens = () =>
   createSelector(
-    [selectAllAssetsInfo, selectNFTIds, makeSelectAddresses()],
-    (assetsInfo, nftIds, addresses): Asset[] => {
+    [selectAllFungibleTokens, selectNFTIds, makeSelectAddresses()],
+    (fungibleTokens, nftIds, addresses): Asset[] => {
       const tokensWithoutMetadata = getAddressesTokenBalances(addresses).reduce((acc, token) => {
-        const hasTokenMetadata = !!assetsInfo.find((t) => t.id === token.id)
+        const hasTokenMetadata = !!fungibleTokens.find((t) => t.id === token.id)
         const hasNFTMetadata = nftIds.includes(token.id)
 
         if (!hasTokenMetadata && !hasNFTMetadata) {
@@ -478,15 +478,15 @@ export const makeSelectAddressesUnknownTokens = () =>
     }
   )
 
-// TODO: Same as in desktop walelt
+// TODO: Same as in desktop wallet
 export const makeSelectAddressesCheckedUnknownTokens = () =>
   createSelector(
-    [makeSelectAddressesUnknownTokens(), (state: RootState) => state.assetsInfo.checkedUnknownTokenIds],
+    [makeSelectAddressesUnknownTokens(), (state: RootState) => state.fungibleTokens.checkedUnknownTokenIds],
     (tokensWithoutMetadata, checkedUnknownTokenIds) =>
       tokensWithoutMetadata.filter((token) => checkedUnknownTokenIds.includes(token.id))
   )
 
-// TODO: Same as in desktop walelt
+// TODO: Same as in desktop wallet
 export const makeSelectAddressesNFTs = () =>
   createSelector([selectAllNFTs, makeSelectAddresses()], (nfts, addresses): NFT[] => {
     const addressesTokenIds = addresses.flatMap(({ tokens }) => tokens.map(({ tokenId }) => tokenId))

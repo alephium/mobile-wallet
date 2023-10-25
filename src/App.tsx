@@ -39,8 +39,8 @@ import {
   syncAddressesDataWhenPendingTxsConfirm,
   syncAddressesHistoricBalances
 } from '~/store/addressesSlice'
-import { syncNetworkTokensInfo, syncUnknownTokensInfo } from '~/store/assets/assetsActions'
-import { selectIsTokensMetadataUninitialized } from '~/store/assets/assetsSelectors'
+import { syncNetworkFungibleTokensInfo, syncUnknownTokensInfo } from '~/store/assets/assetsActions'
+import { selectIsFungibleTokensMetadataUninitialized } from '~/store/assets/assetsSelectors'
 import { apiClientInitFailed, apiClientInitSucceeded } from '~/store/networkSlice'
 import { selectAllPendingTransactions } from '~/store/pendingTransactionsSlice'
 import { store } from '~/store/store'
@@ -94,17 +94,17 @@ const Main = ({ children, ...props }: ViewProps) => {
   const addressesStatus = useAppSelector((s) => s.addresses.status)
   const network = useAppSelector((s) => s.network)
   const addressIds = useAppSelector(selectAddressIds)
-  const assetsInfo = useAppSelector((s) => s.assetsInfo)
-  const isLoadingTokensMetadata = useAppSelector((s) => s.assetsInfo.loading)
+  const fungibleTokens = useAppSelector((s) => s.fungibleTokens)
+  const isLoadingFungibleTokensMetadata = useAppSelector((s) => s.fungibleTokens.loading)
   const isSyncingAddressData = useAppSelector((s) => s.addresses.syncingAddressData)
-  const isTokensMetadataUninitialized = useAppSelector(selectIsTokensMetadataUninitialized)
+  const isFungibleTokensMetadataUninitialized = useAppSelector(selectIsFungibleTokensMetadataUninitialized)
   const selectAddressesHashesWithPendingTransactions = useMemo(makeSelectAddressesHashesWithPendingTransactions, [])
   const addressesWithPendingTxs = useAppSelector(selectAddressesHashesWithPendingTransactions)
   const pendingTxs = useAppSelector(selectAllPendingTransactions)
 
   const selectAddressesUnknownTokens = useMemo(makeSelectAddressesUnknownTokens, [])
   const unknownTokens = useAppSelector(selectAddressesUnknownTokens)
-  const checkedUnknownTokenIds = useAppSelector((s) => s.assetsInfo.checkedUnknownTokenIds)
+  const checkedUnknownTokenIds = useAppSelector((s) => s.fungibleTokens.checkedUnknownTokenIds)
   const unknownTokenIds = unknownTokens.map((token) => token.id)
   const newUnknownTokens = difference(unknownTokenIds, checkedUnknownTokenIds)
 
@@ -135,8 +135,8 @@ const Main = ({ children, ...props }: ViewProps) => {
 
   useEffect(() => {
     if (network.status === 'online') {
-      if (assetsInfo.status === 'uninitialized' && !isLoadingTokensMetadata) {
-        dispatch(syncNetworkTokensInfo())
+      if (fungibleTokens.status === 'uninitialized' && !isLoadingFungibleTokensMetadata) {
+        dispatch(syncNetworkFungibleTokensInfo())
       }
       if (addressesStatus === 'uninitialized') {
         if (!isSyncingAddressData && addressIds.length > 0) {
@@ -144,7 +144,7 @@ const Main = ({ children, ...props }: ViewProps) => {
           dispatch(syncAddressesHistoricBalances())
         }
       } else if (addressesStatus === 'initialized') {
-        if (!isTokensMetadataUninitialized && !isLoadingTokensMetadata && newUnknownTokens.length > 0) {
+        if (!isFungibleTokensMetadataUninitialized && !isLoadingFungibleTokensMetadata && newUnknownTokens.length > 0) {
           dispatch(syncUnknownTokensInfo(newUnknownTokens))
         }
       }
@@ -152,11 +152,11 @@ const Main = ({ children, ...props }: ViewProps) => {
   }, [
     addressIds.length,
     addressesStatus,
-    assetsInfo.status,
+    fungibleTokens.status,
     dispatch,
-    isLoadingTokensMetadata,
+    isLoadingFungibleTokensMetadata,
     isSyncingAddressData,
-    isTokensMetadataUninitialized,
+    isFungibleTokensMetadataUninitialized,
     network.status,
     newUnknownTokens
   ])
