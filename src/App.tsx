@@ -19,7 +19,7 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 import dayjs from 'dayjs'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import { StatusBar } from 'expo-status-bar'
-import { difference } from 'lodash'
+import { difference, union } from 'lodash'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ViewProps } from 'react-native'
 import { RootSiblingParent } from 'react-native-root-siblings'
@@ -44,7 +44,10 @@ import { selectIsFungibleTokensMetadataUninitialized } from '~/store/assets/asse
 import { apiClientInitFailed, apiClientInitSucceeded } from '~/store/networkSlice'
 import { selectAllPendingTransactions } from '~/store/pendingTransactionsSlice'
 import { store } from '~/store/store'
-import { makeSelectAddressesHashesWithPendingTransactions } from '~/store/transactions/transactionSelectors'
+import {
+  makeSelectAddressesHashesWithPendingTransactions,
+  selectTransactionUnknownTokenIds
+} from '~/store/transactions/transactionSelectors'
 import { themes } from '~/style/themes'
 
 dayjs.extend(updateLocale)
@@ -103,10 +106,10 @@ const Main = ({ children, ...props }: ViewProps) => {
   const pendingTxs = useAppSelector(selectAllPendingTransactions)
 
   const selectAddressesUnknownTokens = useMemo(makeSelectAddressesUnknownTokens, [])
-  const unknownTokens = useAppSelector(selectAddressesUnknownTokens)
+  const addressUnknownTokenIds = useAppSelector(selectAddressesUnknownTokens)
+  const txUnknownTokenIds = useAppSelector(selectTransactionUnknownTokenIds)
   const checkedUnknownTokenIds = useAppSelector((s) => s.fungibleTokens.checkedUnknownTokenIds)
-  const unknownTokenIds = unknownTokens.map((token) => token.id)
-  const newUnknownTokens = difference(unknownTokenIds, checkedUnknownTokenIds)
+  const newUnknownTokens = difference(union(addressUnknownTokenIds, txUnknownTokenIds), checkedUnknownTokenIds)
 
   useLoadStoredSettings()
 

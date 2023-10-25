@@ -457,22 +457,20 @@ export const makeSelectAddressesKnownFungibleTokens = () =>
 export const makeSelectAddressesUnknownTokens = () =>
   createSelector(
     [selectAllFungibleTokens, selectNFTIds, makeSelectAddresses()],
-    (fungibleTokens, nftIds, addresses): Asset[] => {
-      const tokensWithoutMetadata = getAddressesTokenBalances(addresses).reduce((acc, token) => {
-        const hasTokenMetadata = !!fungibleTokens.find((t) => t.id === token.id)
-        const hasNFTMetadata = nftIds.includes(token.id)
+    (fungibleTokens, nftIds, addresses): Asset['id'][] => {
+      const tokensWithoutMetadata = getAddressesTokenBalances(addresses).reduce(
+        (acc, token) => {
+          const hasTokenMetadata = !!fungibleTokens.find((t) => t.id === token.id)
+          const hasNFTMetadata = nftIds.includes(token.id)
 
-        if (!hasTokenMetadata && !hasNFTMetadata) {
-          acc.push({
-            id: token.id,
-            balance: BigInt(token.balance.toString()),
-            lockedBalance: BigInt(token.lockedBalance.toString()),
-            decimals: 0
-          })
-        }
+          if (!hasTokenMetadata && !hasNFTMetadata) {
+            acc.push(token.id)
+          }
 
-        return acc
-      }, [] as Asset[])
+          return acc
+        },
+        [] as Asset['id'][]
+      )
 
       return tokensWithoutMetadata
     }
@@ -483,7 +481,7 @@ export const makeSelectAddressesCheckedUnknownTokens = () =>
   createSelector(
     [makeSelectAddressesUnknownTokens(), (state: RootState) => state.fungibleTokens.checkedUnknownTokenIds],
     (tokensWithoutMetadata, checkedUnknownTokenIds) =>
-      tokensWithoutMetadata.filter((token) => checkedUnknownTokenIds.includes(token.id))
+      tokensWithoutMetadata.filter((tokenId) => checkedUnknownTokenIds.includes(tokenId))
   )
 
 // TODO: Same as in desktop wallet
