@@ -21,14 +21,18 @@ import { ViewProps } from 'react-native'
 import styled, { css } from 'styled-components/native'
 
 import AppText from '~/components/AppText'
-import BaseHeader, { HeaderOptions } from '~/components/headers/BaseHeader'
+import BaseHeader, { BaseHeaderOptions } from '~/components/headers/BaseHeader'
+import { ProgressWorkflow } from '~/components/headers/ProgressHeader'
 import StackHeader from '~/components/headers/StackHeader'
 import { DEFAULT_MARGIN, VERTICAL_GAP } from '~/style/globalStyle'
 
 export interface ScreenProps extends ViewProps {
   hasNavigationHeader?: boolean
   contrastedBg?: boolean
-  headerOptions?: HeaderOptions
+  headerOptions?: BaseHeaderOptions & {
+    type?: 'default' | 'stack' | 'progress'
+    progressWorkflow?: ProgressWorkflow
+  }
 }
 
 const Screen = ({ children, hasNavigationHeader, headerOptions, style, ...props }: ScreenProps) => {
