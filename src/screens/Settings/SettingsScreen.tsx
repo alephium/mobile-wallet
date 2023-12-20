@@ -17,6 +17,7 @@ along with the library. If not, see <http://www.gnu.org/licenses/>.
 */
 
 import { StackScreenProps } from '@react-navigation/stack'
+import * as Application from 'expo-application'
 import { capitalize } from 'lodash'
 import { usePostHog } from 'posthog-react-native'
 import { useState } from 'react'
@@ -218,6 +219,11 @@ const SettingsScreen = ({ navigation, ...props }: ScreenProps) => {
             variant="alert"
             onPress={handleDeleteButtonPress}
           />
+        </ScreenSection>
+        <ScreenSection>
+          <AppText style={{ textAlign: 'center' }} color="secondary">
+            Version {Application.nativeApplicationVersion} build {Application.nativeBuildVersion}
+          </AppText>
         </ScreenSection>
       </ScrollScreenStyled>
 
